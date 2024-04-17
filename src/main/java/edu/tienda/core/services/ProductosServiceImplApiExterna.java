@@ -21,10 +21,12 @@ public class ProductosServiceImplApiExterna implements ProductoService{
     public List<Producto> getProductos() {
         RestTemplate restTemplate = new RestTemplate();
 
-        ResponseEntity<List<Producto>> response = RestTemplate.
+        ResponseEntity<List<Producto>> response = restTemplate.
                 exchange("http://localhost:9525/tienda/api/v1/productos/fake-productos",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<Producto>>() {
-                            }
-                        })
+                        });
+        List<Producto> productos = response.getBody();
+
+        return productos;
     }
 }
